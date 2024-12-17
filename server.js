@@ -19,7 +19,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 const apkPath = path.join(__dirname, "uploads/app-release.apk");
 
 // MongoDB connection
-mongodb+srv://jmudit467:dcHvfaWWcjJLLlWv@zucol.f1wni.mongodb.net/?retryWrites=true&w=majority&appName=zucol;
+const uri = mongodb+srv://jmudit467:dcHvfaWWcjJLLlWv@zucol.f1wni.mongodb.net/?retryWrites=true&w=majority&appName=zucol;
 mongoose.connect(uri)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
