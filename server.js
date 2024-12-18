@@ -159,6 +159,28 @@ app.post('/api/login', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+app.get('/user-details/:id', async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const userDetails = {
+      username: user.username,
+      email: user.email,
+      phone: user.phone,
+      profileImage: user.profileImage || '',
+    };
+
+    res.status(200).json(userDetails);
+  } catch (err) {
+    res.status(500).json({ message: 'Error retrieving user details' });
+  }
+});
+
 
 app.put('/update-profile/:userId', upload.single('profileImage'), async (req, res) => {
   try {
