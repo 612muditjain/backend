@@ -20,8 +20,7 @@ const apkPath = path.join(__dirname, "uploads/app-release.apk");
 
 // MongoDB connection
 
-const uri = "mongodb+srv://jmudit467:dcHvfaWWcjJLLlWv@zucol.f1wni.mongodb.net/?retryWrites=true&w=majority&appName=zucol";
-
+const uri = "mongodb+srv://jmudit467:PmYbShrb1OkKeHCl@zucoll.8v4mo.mongodb.net/?retryWrites=true&w=majority&appName=zucoll";
 mongoose.connect(uri)
 .then(() => console.log("MongoDB connected successfully"))
 .catch(err => console.error("Connection error:", err));
