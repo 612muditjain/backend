@@ -100,6 +100,35 @@ app.post("/api/signup", upload.single("profileImage"), async (req, res) => {
   }
 });
 
+app.get('/user-details', (req, res) => {
+  const token = req.headers['authorization']?.split(' ')[1]; // Expecting "Bearer <token>"
+
+  if (!token) {
+    return res.status(403).json({ message: 'No token provided' });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
+
+    const userId = decoded.userId;
+    const user = users.find(u => u.id === userId);
+
+    if (user) {
+      res.json({
+        username: user.username,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        profileImage: user.profileImage,
+      });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  });
+});
+
+
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
